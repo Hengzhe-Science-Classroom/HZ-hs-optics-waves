@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optics & Waves (High School) — Interactive</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <button id="sidebar-toggle" aria-label="Toggle sidebar">&#9776;</button>
+        <aside id="sidebar">
+            <div id="sidebar-header">
+                <h1>Optics &amp; Waves</h1>
+                <p class="author">Hecht / Crawford / 人教版</p>
+                <div id="progress-container">
+                    <div id="progress-bar"><div id="progress-fill"></div></div>
+                    <span id="progress-text">0%</span>
+                </div>
+            </div>
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Search topics...">
+            </div>
+            <nav id="chapter-nav"></nav>
+            <div id="sidebar-footer"><p class="copyright-notice" style="font-size:0.7rem;color:#888;margin-top:12px;text-align:center;">&copy; 2026 Hengzhe Zhao · AGPL-3.0 &amp; Commercial</p>
+                <button id="reset-progress">Reset Progress</button>
+            </div>
+        </aside>
+        <main id="main-content">
+            <div id="welcome-screen">
+                <div class="welcome-hero">
+                    <h1>Optics &amp; Waves</h1>
+                    <h2>Waves, Sound, Light, Interference &amp; Diffraction</h2>
+                    <p class="welcome-description">
+                        Watch waves ripple, light bend, and rainbows form.
+                        From vibrating strings to quantum photons — see the wave nature of reality.
+                    </p>
+                </div>
+                <div class="roadmap">
+                    <h3>What You'll Explore</h3>
+                    <div class="roadmap-parts">
+                        <div class="roadmap-part">
+                            <h4>Part A: Mechanical Waves</h4>
+                            <ul>
+                                <li>Ch 0: What Is a Wave?</li>
+                                <li>Ch 1: Describing Waves</li>
+                                <li>Ch 2: Superposition &amp; Interference</li>
+                                <li>Ch 3: Standing Waves &amp; Resonance</li>
+                                <li>Ch 4: The Doppler Effect</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-part">
+                            <h4>Part B: Sound</h4>
+                            <ul>
+                                <li>Ch 5: Sound Waves</li>
+                                <li>Ch 6: Beats &amp; Acoustic Interference</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-part">
+                            <h4>Part C: Geometric Optics</h4>
+                            <ul>
+                                <li>Ch 7: Reflection</li>
+                                <li>Ch 8: Refraction &amp; Snell's Law</li>
+                                <li>Ch 9: Total Internal Reflection</li>
+                                <li>Ch 10: Lenses &amp; Image Formation</li>
+                                <li>Ch 11: Optical Instruments</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-part">
+                            <h4>Part D: Wave Optics</h4>
+                            <ul>
+                                <li>Ch 12: Huygens' Principle</li>
+                                <li>Ch 13: Double-Slit Interference</li>
+                                <li>Ch 14: Thin-Film Interference</li>
+                                <li>Ch 15: Single-Slit Diffraction</li>
+                                <li>Ch 16: Diffraction Gratings</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-part">
+                            <h4>Part E: Modern Optics</h4>
+                            <ul>
+                                <li>Ch 17: Polarization</li>
+                                <li>Ch 18: Dispersion &amp; Color</li>
+                                <li>Ch 19: Wave-Particle Duality</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="welcome-start">Select a chapter from the sidebar to dive into the world of waves and light!</p>
+            </div>
+            <div id="chapter-content" style="display:none;">
+                <div id="chapter-header">
+                    <div id="chapter-number-badge"></div>
+                    <h1 id="chapter-title"></h1>
+                    <p id="chapter-subtitle"></p>
+                </div>
+                <div id="section-tabs"></div>
+                <div id="section-content"></div>
+                <div id="exercises-panel" style="display:none;">
+                    <h3>Exercises</h3>
+                    <div id="exercises-list"></div>
+                </div>
+                <div id="chapter-nav-buttons">
+                    <button id="prev-btn">&larr; Previous</button>
+                    <span id="section-indicator"></span>
+                    <button id="next-btn">Next &rarr;</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script>
+    window.CHAPTER_MANIFEST = [
+        {number:0,  id:'ch00', title:'What Is a Wave?',                     file:'ch00-wave-basics'},
+        {number:1,  id:'ch01', title:'Describing Waves — λ, f, v',          file:'ch01-wave-description'},
+        {number:2,  id:'ch02', title:'Superposition & Interference',         file:'ch02-superposition'},
+        {number:3,  id:'ch03', title:'Standing Waves & Resonance',          file:'ch03-standing-waves'},
+        {number:4,  id:'ch04', title:'The Doppler Effect',                   file:'ch04-doppler'},
+        {number:5,  id:'ch05', title:'Sound Waves',                         file:'ch05-sound'},
+        {number:6,  id:'ch06', title:'Beats & Acoustic Interference',       file:'ch06-beats'},
+        {number:7,  id:'ch07', title:'Reflection',                          file:'ch07-reflection'},
+        {number:8,  id:'ch08', title:'Refraction & Snell\'s Law',           file:'ch08-refraction'},
+        {number:9,  id:'ch09', title:'Total Internal Reflection',           file:'ch09-total-reflection'},
+        {number:10, id:'ch10', title:'Lenses & Image Formation',            file:'ch10-lenses'},
+        {number:11, id:'ch11', title:'Optical Instruments',                  file:'ch11-instruments'},
+        {number:12, id:'ch12', title:'Huygens\' Principle',                 file:'ch12-huygens'},
+        {number:13, id:'ch13', title:'Double-Slit Interference',            file:'ch13-double-slit'},
+        {number:14, id:'ch14', title:'Thin-Film Interference',              file:'ch14-thin-film'},
+        {number:15, id:'ch15', title:'Single-Slit Diffraction',             file:'ch15-single-slit'},
+        {number:16, id:'ch16', title:'Diffraction Gratings',                file:'ch16-grating'},
+        {number:17, id:'ch17', title:'Polarization',                        file:'ch17-polarization'},
+        {number:18, id:'ch18', title:'Dispersion & Color',                  file:'ch18-dispersion'},
+        {number:19, id:'ch19', title:'Wave-Particle Duality',               file:'ch19-duality'}
+    ];
+    </script>
+    <script src="viz-engine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
